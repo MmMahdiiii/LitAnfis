@@ -9,9 +9,9 @@ model_params = {'in_features': X.shape[1],
                 'out_features': len(np.unique(y))}
 
 learning_params = {
-    'lr': 0.001,
-    'batch_size' : 4,
-    'num_epochs': 300
+    'lr': 0.01,
+    'batch_size' : 30,
+    'num_epochs': 200
 }
 
 train_performance, test_performance = run_classification_pipeline(

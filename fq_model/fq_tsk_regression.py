@@ -23,17 +23,16 @@ class FQ_regression(nn.Module):
         y = torch.exp(-y**2)
         y = (y * tt) + 0.5 * (1 - tt)
         y = torch.prod(y, dim=1)
-        f_min = torch.abs(tt) / 2 - 0.5
         f_max = torch.abs(tt) / 2 + 0.5
-        f_min = f_min.prod(dim=1)
         f_max = f_max.prod(dim=1)
-        y = (y - f_min) / (f_max - f_min)
+        y = y / (f_max)
         f_sum = torch.sum(y, dim=1).unsqueeze(dim=1)
         y = y / f_sum
         y = y.unsqueeze(1)
         X = torch.concatenate([X, torch.ones((X.shape[0], 1)).to(y.device)], dim=1)
         X = X.unsqueeze(2)
         y = X * y
+        print(y.shape)
         y = torch.flatten(y, start_dim=1)
         y = self.linear(y)
         return y

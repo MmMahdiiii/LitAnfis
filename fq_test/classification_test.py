@@ -12,7 +12,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import accuracy_score, mean_squared_error
 from fq_model.fq_classification import FQ_classification
 
-def run_classification_pipeline(X, y, test_size=5, n_runs=10, random_state=42, model_params=None, learning_params=None):
+def run_classification_pipeline(X, y, test_size=0.2, n_runs=10, random_state=42, min_acc=0.94, model_params=None, learning_params=None):
     if model_params is None:
         model_params = {'in_features': X.shape[1], 'rules': 2, 'out_features': len(np.unique(y))}
 
@@ -29,12 +29,14 @@ def run_classification_pipeline(X, y, test_size=5, n_runs=10, random_state=42, m
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(device)
     
-    progress = tqdm(total=n_runs*num_epochs)
+    progress = tqdm(total=n_runs)
     
     test_performance = []
     train_performance = []
     
-    for run in range(n_runs):
+    run = n_runs 
+    # for run in range(n_runs):
+    while run > 0:
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state+run)
     
 
@@ -58,7 +60,6 @@ def run_classification_pipeline(X, y, test_size=5, n_runs=10, random_state=42, m
                 loss = F.cross_entropy(outputs, batch_y)
                 loss.backward()
                 optimizer.step()
-            progress.update(1)  
     
         model.eval()
         with torch.no_grad():
@@ -67,8 +68,10 @@ def run_classification_pipeline(X, y, test_size=5, n_runs=10, random_state=42, m
             prediction = model(X_train).argmax(dim=1)
             temp_train = accuracy_score(y_train.cpu().numpy(), prediction.cpu().numpy())
         
-    
-        test_performance.append(temp_test)
-        train_performance.append(temp_train)
+        if temp_train > min_acc:
+            test_performance.append(temp_test)
+            train_performance.append(temp_train)
+            run -= 1
+            progress.update(1)  
                 
     return train_performance, test_performance
