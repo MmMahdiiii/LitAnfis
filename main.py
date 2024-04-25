@@ -9,18 +9,18 @@ model_params = {'in_features': X.shape[1],
                 'out_features': len(np.unique(y))}
 
 learning_params = {
-    'lr': 0.007,
-    'batch_size' : 16,
-    'num_epochs': 100
+    'lr': 0.001,
+    'batch_size' : 4,
+    'num_epochs': 300
 }
 
 train_performance, test_performance = run_classification_pipeline(
     X, y,
-    n_splits=10,
-    n_runs=3,
+    test_size=0.3,
+    n_runs=30,
     model_params=model_params,
     learning_params=learning_params
 )
 
-print(np.mean(test_performance))
-print(np.mean(train_performance))
+print(test_performance)
+print(train_performance)
