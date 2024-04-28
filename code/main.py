@@ -90,7 +90,7 @@ if __name__ == '__main__':
     RL_hyperparams = {
         "train_mode"            : train_mode,
         "RL_load_path"          : f'./{map_size}x{map_size}/final_weights' + '_' + '3000' + '.pth',
-        "save_path"             : f'./artifacts',
+        "save_path"             : f'./artifacts/wights',
         "save_interval"         : 500,
         
         "clip_grad_norm"        : 3,
@@ -98,7 +98,7 @@ if __name__ == '__main__':
         "discount_factor"       : 0.999,
         "batch_size"            : 128,
         "update_frequency"      : 10,
-        "max_episodes"          : 3000           if train_mode else 5,
+        "max_episodes"          : 200           if train_mode else 5,
         "max_steps"             : 200,
         "render"                : render,
         

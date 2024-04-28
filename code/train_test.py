@@ -142,6 +142,8 @@ class Model_TrainTest:
                       f"Epsilon: {self.agent.epsilon_max:.2f}, {done=}, {truncation=}")
             print(result)
         self.plot_training(episode)
+        self.agent.save(self.save_path + '_' + f'{episode}' + '.pth')
+        print('\n~~~~~~Interval Save: Model saved.\n')
                                                                     
 
     def test(self, max_episodes):  
@@ -206,10 +208,10 @@ class Model_TrainTest:
         
         # Only save as file if last episode
         if episode == self.max_episodes:
-            plt.savefig('./reward_plot.png', format='png', dpi=600, bbox_inches='tight')
+            plt.savefig('./artifacts/reward_plot.png', format='png', dpi=600, bbox_inches='tight')
         plt.tight_layout()
         plt.grid(True)
-        plt.show()
+        # plt.show()
         plt.clf()
         plt.close() 
         
@@ -222,8 +224,8 @@ class Model_TrainTest:
         
         # Only save as file if last episode
         if episode == self.max_episodes:
-            plt.savefig('./Loss_plot.png', format='png', dpi=600, bbox_inches='tight')
+            plt.savefig('./artifacts/Loss_plot.png', format='png', dpi=600, bbox_inches='tight')
         plt.tight_layout()
         plt.grid(True)
-        plt.show()        
+        # plt.show()        
         
