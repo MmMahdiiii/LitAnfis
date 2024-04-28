@@ -10,7 +10,7 @@ class FQ_classification(nn.Module):
         self.mean = Parameter(torch.rand((1, in_features, rules), **factory_kwargs))
         self.std = Parameter(torch.rand((1, in_features, rules), **factory_kwargs))
         self.tt = Parameter(torch.randn((1, in_features, rules), **factory_kwargs) * 0.1)
-        self.linear = nn.Linear(in_features=rules, out_features=out_features)
+        self.linear = nn.Linear(in_features=rules * (in_features + 1), out_features=out_features, bias=True)
 
     def forward(self, X: Tensor):
         y = X.unsqueeze(2)
@@ -27,6 +27,7 @@ class FQ_classification(nn.Module):
         X = X.unsqueeze(2)
         y = X * y
         y = torch.flatten(y, start_dim=1)
+        print(y.shape)
         y = self.linear(y)
         y = torch.softmax(y, dim=1)
         return y

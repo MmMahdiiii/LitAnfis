@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from sklearn.model_selection import train_test_split, KFold, LeaveOneOut
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import accuracy_score, mean_squared_error
-from fq_model.fq_classification import FQ_classification
+from fq_model.fq_tsk_classification import FQ_classification
 
 def run_classification_pipeline(X, y, test_size=0.2, n_runs=10, random_state=42, min_acc=0.94, model_params=None, learning_params=None):
     if model_params is None:

@@ -17,7 +17,7 @@ class Haberman:
         X = scaler.transform(X)
         
         self.X = X
-        self.y = y
+        self.y = y - 1
     
     def get_data(self):
         return self.X, self.y
