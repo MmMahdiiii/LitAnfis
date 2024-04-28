@@ -1,18 +1,21 @@
-import pandas as pd
 from tqdm import tqdm
 import numpy as np
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
-from torch.nn.parameter import Parameter
 from torch.optim import Adam
-from torch.utils.data import DataLoader, TensorDataset
-from sklearn.model_selection import train_test_split, KFold, LeaveOneOut
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.metrics import accuracy_score, mean_squared_error
-from fq_model.fq_tsk_classification import FQ_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from fq_model.fq_classification import FQ_classification as FQ_mamdani
+from fq_model.fq_tsk_classification import FQ_classification as FQ_tsk
 
-def run_classification_pipeline(X, y, test_size=0.2, n_runs=10, random_state=42, min_acc=0.94, model_params=None, learning_params=None):
+def run_classification_pipeline(X, y,
+                                test_size=0.2,
+                                n_runs=10,
+                                random_state=42,
+                                min_acc=0.94,
+                                model='mamdani',
+                                model_params=None,
+                                learning_params=None):
     if model_params is None:
         model_params = {'in_features': X.shape[1], 'rules': 2, 'out_features': len(np.unique(y))}
 
@@ -45,7 +48,11 @@ def run_classification_pipeline(X, y, test_size=0.2, n_runs=10, random_state=42,
         y_train = torch.Tensor(y_train).type(torch.LongTensor).to(device)
         y_test = torch.Tensor(y_test).type(torch.LongTensor).to(device)
 
-        model = FQ_classification(**model_params).to(device)
+        if model == 'mamdani':
+            model = FQ_mamdani(**model_params).to(device)
+        else:
+            model = FQ_tsk(**model_params).to(device)
+            
         optimizer = Adam(model.parameters(), lr=lr)
         
         temp_test=0
