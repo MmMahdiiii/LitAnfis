@@ -27,7 +27,6 @@ class FQ_classification(nn.Module):
         X = X.unsqueeze(2)
         y = X * y
         y = torch.flatten(y, start_dim=1)
-        print(y.shape)
         y = self.linear(y)
         y = torch.softmax(y, dim=1)
         return y
