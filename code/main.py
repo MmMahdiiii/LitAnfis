@@ -98,7 +98,7 @@ if __name__ == '__main__':
         "discount_factor"       : 0.999,
         "batch_size"            : 128,
         "update_frequency"      : 10,
-        "max_episodes"          : 200           if train_mode else 5,
+        "max_episodes"          : 2000           if train_mode else 5,
         "max_steps"             : 200,
         "render"                : render,
         
