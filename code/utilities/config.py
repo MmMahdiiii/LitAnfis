@@ -1,7 +1,7 @@
 imitaition_conf = {
     'num_res_blocks' : 19,
     'pgn_dir' : './Lichess Elite Database',
-    'time_limit' : 0.5,
+    'time_limit' : 24,
     'batch_size' : 128,
     'epochs' : 2,
     'actor_lr' : 1e-5,
