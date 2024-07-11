@@ -12,4 +12,4 @@ imitaition_conf = {
     'loss_report_rate' : 10
 }
 
-download_url = "https://storage.cse-sbu.ir/s/aETtMXL28RBPiL2"
+download_url = "https://storage.cse-sbu.ir/s/aETtMXL28RBPiL2/download/Lichess%20Elite%20Database.7z"
