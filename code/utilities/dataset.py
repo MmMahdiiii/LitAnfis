@@ -43,6 +43,8 @@ class ChessDataset:
         self.actions_pool = deque()
         self.results_pool = deque()
 
+        # making the environment
+        self.env = gym.make('ChessAlphaZero-v0')
         # logging purposes
         self.game_count = 0
         self.opened_files = 1
@@ -60,7 +62,7 @@ class ChessDataset:
         self.states_pool.clear()
         self.actions_pool.clear()
         self.results_pool.clear()
-        env = gym.make('ChessAlphaZero-v0')
+
         game = None
         while len(self.results_pool) < self.read_size:
             try:
@@ -93,7 +95,7 @@ class ChessDataset:
                 continue
 
             try:
-                state = env.reset()
+                state = self.env.reset()
             except Exception as e:
                 print(
                     f'There was a problem resetting the environment. Without environment there is nothing much to do.\n{e}')
@@ -113,7 +115,7 @@ class ChessDataset:
             for move in game.mainline_moves():
                 try:
                     move = chess.Move.from_uci(move.uci())
-                    action = env.encode(move)
+                    action = self.env.encode(move)
                 except Exception as e:
                     print(f'Illegal move found in the game, ignore this game and read another one.')
                     break
@@ -131,10 +133,10 @@ class ChessDataset:
                 self.results_pool.append(add_result)
                 # print(env.render(mode='unicode'))
                 try:
-                    state = env.step(action)[0]
+                    state = self.env.step(action)[0]
                 except Exception as e:
                     print(
-                        f'An error occurred performing the action {env.decode(action)}, ignore this game and read another.')
+                        f'An error occurred performing the action {self.env.decode(action)}, ignore this game and read another.')
                     print(f'Also the appended state and action should be deleted.')
                     self.states_pool.pop()
                     self.actions_pool.pop()

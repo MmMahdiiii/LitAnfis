@@ -80,7 +80,7 @@
 
 
 from imitation import Imitaition
-
+import utilities.data_downloader
 
 from utilities.config import imitaition_conf
 
