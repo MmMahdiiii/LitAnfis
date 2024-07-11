@@ -1,0 +1,1 @@
+from gym_chess.alphazero import BoardEncoding

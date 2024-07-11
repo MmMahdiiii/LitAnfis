@@ -2,3 +2,10 @@
 .vscode/*
 */__pycache__/*
 *.pdf
+
+database/*
+*/__pycache__/*
+*/__pycache__
+/__pycache__
+artifacts/*
+*.7z
