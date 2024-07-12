@@ -85,16 +85,18 @@ class Imitaition:
                     batch_states, batch_actions, batch_results = batch
 
                     win = batch_results > -0.5
+                    
                     batch_actions = batch_actions[win]
 
-                    actor_out, _ = self.model(batch_states[win])
+                    if len (batch_actions) > 0:
+                        actor_out, _ = self.model(batch_states[win])
 
-                    ac_loss = self.CeLoss(actor_out, batch_actions)
-                    self.actor_loss_history = ac_loss.item() + self.landa * self.actor_loss_history
+                        ac_loss = self.CeLoss(actor_out, batch_actions)
+                        self.actor_loss_history = ac_loss.item() + self.landa * self.actor_loss_history
 
-                    self.actor_optimizer.zero_grad() # Zero the gradients
-                    ac_loss.backward(retain_graph=True)
-                    self.actor_optimizer.step()
+                        self.actor_optimizer.zero_grad() # Zero the gradients
+                        ac_loss.backward(retain_graph=True)
+                        self.actor_optimizer.step()
 
                     _ , critic_out = self.model(batch_states)
 
