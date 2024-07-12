@@ -1,6 +1,6 @@
 imitaition_conf = {
     'num_res_blocks' : 19,
-    'pgn_dir' : './Lichess Elite Database',
+    'pgn_dir' : '/content/drive/MyDrive/upload/Lichess Elite Database.7z',
     'time_limit' : 24,
     'batch_size' : 128,
     'epochs' : 2,
