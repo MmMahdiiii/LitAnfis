@@ -1,6 +1,6 @@
 imitaition_conf = {
     'num_res_blocks' : 19,
-    'pgn_dir' : '/content/drive/MyDrive/upload/Lichess Elite Database.7z',
+    'pgn_dir' : '/content/Lichess Elite Database',
     'time_limit' : 24,
     'batch_size' : 128,
     'epochs' : 2,
@@ -12,4 +12,3 @@ imitaition_conf = {
     'loss_report_rate' : 10
 }
 
-download_url = "https://storage.cse-sbu.ir/s/aETtMXL28RBPiL2/download/Lichess%20Elite%20Database.7z"
