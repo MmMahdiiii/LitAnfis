@@ -3,17 +3,6 @@
 This repository contains the reference implementation for the **LitANFIS** family of models together with a few baselines (plain ANFIS and UNFIS).  
 The code is 100 % PyTorch and ships with minimal utilities for training, evaluation, hyper-parameter tuning and interactive exploration in notebooks.
 
-> **TL;DR**  
-    > ```bash
-    > git clone https://github.com/<your-org>/LitAnfis.git
-    > cd LitAnfis
-    > python -m venv .venv && source .venv/bin/activate        # optional but recommended
-    > pip install -r requirements.txt                           # installs PyTorch + scikit-learn + PyCaret, etc.
-    > python train/classification_test.py                       # quick sanity check on the Wine data-set
-    > ```
-
----
-
 ## Repository layout
 
 ````
