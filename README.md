@@ -14,7 +14,7 @@ LitAnfis-main/
 │   └── unfis.py            # UNFIS baseline (feature–relaxed rules)
 ├── train/                  # Simple training / evaluation scripts
 │   ├── classification_test.py
-│   └── early\_stop.py
+│   └── early_stop.py
 ├── tests/                  # Dataset wrappers + quick tests
 │   ├── uci_test.py         # UCI data-set helpers
 │   └── class_test.py       # Digits / Segmentation helpers
