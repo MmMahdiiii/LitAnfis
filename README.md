@@ -41,7 +41,7 @@ LitAnfis-main/
 
 1. **Clone**
    ```bash
-   git clone https://github.com/<your-org>/LitAnfis.git
+   git clone https://github.com/MmMahdiiii/LitAnfis.git
    cd LitAnfis
     ```
 
